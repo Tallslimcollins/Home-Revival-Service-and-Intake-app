@@ -41,8 +41,7 @@ export const SERVICES_CATALOGUE: ServiceOffering[] = [
     defaultSpecifics: {
       approximateScale: '40" x 60" Statement Scale',
       subjectDirection: 'Botanical & Flora Study',
-      acousticBattingBacking: true,
-      floaterFrameOption: 'Natural Rubbed Hardwood Frame'
+      acousticBatting: true,
     },
     specificOptions: [
       {
@@ -60,7 +59,7 @@ export const SERVICES_CATALOGUE: ServiceOffering[] = [
       },
       {
         id: 'subjectDirection',
-        name: 'Visual Theme',
+        name: 'Visual Theme / Style',
         type: 'select',
         options: [
           'Botanical & Flora Study',
@@ -71,15 +70,11 @@ export const SERVICES_CATALOGUE: ServiceOffering[] = [
         defaultValue: 'Botanical & Flora Study'
       },
       {
-        id: 'floaterFrameOption',
-        name: 'Hardwood Floater Frame Preference',
-        type: 'select',
-        options: [
-          'Natural Rubbed White Oak Frame',
-          'Walnut Stained Hardwood Frame',
-          'Unframed Clean Textile Wrap'
-        ],
-        defaultValue: 'Natural Rubbed White Oak Frame'
+        id: 'acousticBatting',
+        name: 'Internal Acoustic Batting (Softens Room Echo)',
+        type: 'boolean',
+        defaultValue: true,
+        description: 'Concealed internal acoustic layer behind fabric wrap'
       }
     ]
   },

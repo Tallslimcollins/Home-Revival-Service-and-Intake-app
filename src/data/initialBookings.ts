@@ -97,7 +97,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
       },
       {
         id: 'li-13',
-        description: 'White Oak natural rubbed floater frame',
+        description: 'Internal solid pine heavy-duty stretcher bar frame & acoustic core',
         amount: 160,
         type: 'materials'
       },
@@ -113,7 +113,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
     specifics: {
       approximateScale: '48" x 72" Grand Architectural Scale',
       subjectDirection: 'Botanical & Flora Study',
-      floaterFrameOption: 'Natural Rubbed White Oak Frame',
+      acousticBatting: true,
       roomLocation: 'Dining room tall niche with evening chandelier lighting'
     },
     specialInstructions: 'Need acoustic dampening because dining room has hardwood floors and high ceilings.',
@@ -124,7 +124,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
         adjustedBy: 'Stevan Collins Lazich',
         previousTotal: 850,
         newTotal: 1140,
-        reason: 'Client upgraded from 40x60 to 48x72 with solid White Oak floater frame',
+        reason: 'Client upgraded from 40x60 to 48x72 gallery-wrapped architectural scale',
         notes: 'Custom commission quoted and built by Stevan in Midtown studio.'
       }
     ],
