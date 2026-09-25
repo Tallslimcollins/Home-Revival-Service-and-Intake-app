@@ -111,42 +111,40 @@ export const Header: React.FC = () => {
               Returning Clients: Service Menu
             </button>
 
-            <button
-              onClick={() => setActiveTab('my-bookings')}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all relative ${
-                activeTab === 'my-bookings'
-                  ? 'bg-[#2C2825] text-white shadow-sm'
-                  : 'text-[#5C554E] hover:text-[#2C2825] hover:bg-[#E6DECFA0]'
-              }`}
-            >
-              Client Bookings
-              {activeBookingsCount > 0 && (
-                <span className="ml-1.5 px-1.5 py-0.2 text-[10px] rounded-full bg-[#B25E29] text-white">
-                  {activeBookingsCount}
-                </span>
-              )}
-            </button>
-            <button
-              onClick={() => setActiveTab('calendar-hub')}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
-                activeTab === 'calendar-hub'
-                  ? 'bg-[#2C2825] text-white shadow-sm'
-                  : 'text-[#5C554E] hover:text-[#2C2825] hover:bg-[#E6DECFA0]'
-              }`}
-            >
-              Calendar & Sync
-            </button>
+            {/* Only shown when Stevan has entered PIN 0874 */}
             {isAdminMode && (
-              <button
-                onClick={() => setActiveTab('admin-dashboard')}
-                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all relative ${
-                  activeTab === 'admin-dashboard'
-                    ? 'bg-[#8F3B16] text-white shadow-sm'
-                    : 'text-[#8F3B16] hover:bg-[#E6DECFA0]'
-                }`}
-              >
-                Studio Admin Active
-              </button>
+              <>
+                <button
+                  onClick={() => setActiveTab('my-bookings')}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all relative ${
+                    activeTab === 'my-bookings'
+                      ? 'bg-[#2C2825] text-white shadow-sm'
+                      : 'text-[#5C554E] hover:text-[#2C2825] hover:bg-[#E6DECFA0]'
+                  }`}
+                >
+                  Bookings Manager
+                </button>
+                <button
+                  onClick={() => setActiveTab('calendar-hub')}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
+                    activeTab === 'calendar-hub'
+                      ? 'bg-[#2C2825] text-white shadow-sm'
+                      : 'text-[#5C554E] hover:text-[#2C2825] hover:bg-[#E6DECFA0]'
+                  }`}
+                >
+                  Calendar Hub
+                </button>
+                <button
+                  onClick={() => setActiveTab('admin-dashboard')}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all relative ${
+                    activeTab === 'admin-dashboard'
+                      ? 'bg-[#8F3B16] text-white shadow-sm'
+                      : 'text-[#8F3B16] hover:bg-[#E6DECFA0]'
+                  }`}
+                >
+                  Studio Admin
+                </button>
+              </>
             )}
           </nav>
 
@@ -257,38 +255,32 @@ export const Header: React.FC = () => {
               setClientType('new');
               setIsIntakeModalOpen(true);
             }}
-            className="font-bold py-1 px-2.5 rounded bg-[#B25E29] text-white flex items-center space-x-1"
+            className="font-bold py-1.5 px-4 rounded-full bg-[#B25E29] text-white flex items-center space-x-1 shadow-sm"
           >
-            <Sparkles className="w-3 h-3 text-amber-200" />
-            <span>New Client</span>
+            <Sparkles className="w-3.5 h-3.5 text-amber-200" />
+            <span>New Clients: Start Here</span>
           </button>
           <button
             onClick={() => {
               setClientType('returning');
               setActiveTab('services');
             }}
-            className={`font-medium py-1 px-2 rounded ${
+            className={`font-semibold py-1.5 px-3 rounded-full ${
               activeTab === 'services' ? 'bg-[#2C2825] text-white' : 'text-[#5C554E]'
             }`}
           >
-            Menu
+            Service Menu
           </button>
-          <button
-            onClick={() => setActiveTab('my-bookings')}
-            className={`font-medium py-1 px-2 rounded ${
-              activeTab === 'my-bookings' ? 'bg-[#2C2825] text-white' : 'text-[#5C554E]'
-            }`}
-          >
-            Bookings ({bookings.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('calendar-hub')}
-            className={`font-medium py-1 px-2 rounded ${
-              activeTab === 'calendar-hub' ? 'bg-[#2C2825] text-white' : 'text-[#5C554E]'
-            }`}
-          >
-            Calendar
-          </button>
+          {isAdminMode && (
+            <button
+              onClick={() => setActiveTab('admin-dashboard')}
+              className={`font-semibold py-1.5 px-3 rounded-full ${
+                activeTab === 'admin-dashboard' ? 'bg-[#8F3B16] text-white' : 'text-[#8F3B16]'
+              }`}
+            >
+              Admin
+            </button>
+          )}
         </div>
       </div>
     </header>
