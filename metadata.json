@@ -1,0 +1,6 @@
+{
+  "name": "Stevan Collins Lazich - Home Revival Booking & Studio Manager",
+  "description": "Custom booking, scheduling, and price adjustment portal for Home Revival services by Stevan Collins Lazich with calendar sync and automated receipts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
