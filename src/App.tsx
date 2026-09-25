@@ -5,7 +5,6 @@ import {
   ShieldCheck, 
   MapPin, 
   ArrowRight, 
-  Search, 
   Bell, 
   SlidersHorizontal, 
   Check, 
@@ -43,7 +42,6 @@ const MainContent: React.FC = () => {
   } = useBookingContext();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
@@ -62,12 +60,7 @@ const MainContent: React.FC = () => {
   };
 
   const filteredServices = services.filter(svc => {
-    const matchesCat = selectedCategory === 'all' || svc.category === selectedCategory;
-    const matchesQuery = 
-      svc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      svc.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      svc.tagline.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCat && matchesQuery;
+    return selectedCategory === 'all' || svc.category === selectedCategory;
   });
 
   return (
@@ -148,10 +141,14 @@ const MainContent: React.FC = () => {
               <div className="absolute right-1/4 -top-12 w-64 h-64 rounded-full bg-[#B25E29]/15 blur-3xl pointer-events-none"></div>
             </div>
 
-            {/* Filter and Search Bar */}
-            <div id="returning-client-menu" className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-[#E7E0D5]">
+            {/* Returning Clients Service Menu Pills */}
+            <div id="returning-client-menu" className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-[#E7E0D5]">
+              <div className="text-xs font-bold font-editorial text-[#2C2825] uppercase tracking-wider hidden sm:block">
+                Service Menu
+              </div>
+
               {/* Category Pills */}
-              <div className="flex items-center space-x-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
+              <div className="flex items-center space-x-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
                 {SERVICE_CATEGORIES.map(cat => (
                   <button
                     key={cat.id}
@@ -165,18 +162,6 @@ const MainContent: React.FC = () => {
                     {cat.label}
                   </button>
                 ))}
-              </div>
-
-              {/* Search box */}
-              <div className="relative w-full md:w-72">
-                <Search className="w-4 h-4 text-[#8C827A] absolute left-3 top-2.5" />
-                <input
-                  type="text"
-                  placeholder="Search art hang, color, organizing..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full text-xs pl-9 pr-3 py-2 bg-[#FAF7F2] border border-[#DCD3C5] rounded-xl text-[#2C2825] focus:ring-1 focus:ring-[#B25E29] focus:outline-none"
-                />
               </div>
             </div>
 
@@ -260,14 +245,14 @@ const MainContent: React.FC = () => {
                 Returning Clients Menu
               </h5>
               <ul className="space-y-1.5 text-stone-400 text-xs">
+                <li>Custom Fabric Wall Art (Custom Quote)</li>
+                <li>Color Palette Plan ($350)</li>
                 <li>Art Hang ($400 flat starting point)</li>
-                <li>Window Treatment Plan ($300 plan)</li>
                 <li>Room Setup + Styling (From $450)</li>
                 <li>Home Reset + Organizing (From $450)</li>
                 <li>Move-In Unpack + Setup (From $350)</li>
                 <li>Full Home Revival Plan (From $1,500)</li>
-                <li>Color Palette Plan ($350)</li>
-                <li>Custom Fabric Wall Art (Custom Quote)</li>
+                <li>Window Treatment Plan ($300 plan)</li>
               </ul>
             </div>
 

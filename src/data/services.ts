@@ -5,15 +5,146 @@ export const GLOBAL_BILLING_TERMS =
 
 export const SERVICE_CATEGORIES = [
   { id: 'all', label: 'All Services' },
+  { id: 'custom-fabric', label: 'Custom Fabric Wall Art' },
+  { id: 'color-finish', label: 'Color Palette (Sherwin-Williams)' },
   { id: 'art-hang', label: 'Art Hang' },
-  { id: 'window-treatment', label: 'Window Treatment Plan' },
   { id: 'styling-revival', label: 'Styling & Revival Plans' },
   { id: 'organizing-moving', label: 'Reset, Organizing & Move-In' },
-  { id: 'color-finish', label: 'Color Palette (Sherwin-Williams)' },
-  { id: 'custom-fabric', label: 'Custom Fabric Wall Art' },
+  { id: 'window-treatment', label: 'Window Treatment Plan' },
 ] as const;
 
 export const SERVICES_CATALOGUE: ServiceOffering[] = [
+  {
+    id: 'custom-fabric-art',
+    title: 'Custom Fabric Wall Art',
+    category: 'custom-fabric',
+    menuBadge: 'Custom work',
+    tagline: 'Large-format fabric wall art combining printed fabric, scale, color, pattern, and selective hand-painted detailing.',
+    description: 'Built to provide acoustic warmth and visual scale without cold glass glare. Quoted custom by size, design, materials, and installation needs.',
+    detailedPoints: [
+      'Large-format textile wall art tailored to specific wall dimensions and sightlines',
+      'Printed fabric murals and botanical panels built on solid pine stretchers',
+      'Internal acoustic batting layer softens room echo and warms acoustics',
+      'Selective hand-painted acrylic & metallic leaf detailing by Stevan',
+      'Quoted custom by size, design, materials, and installation needs'
+    ],
+    exclusions: [
+      'Quoted custom by size, design, materials, and installation needs.'
+    ],
+    pricingModel: 'custom_quote',
+    basePrice: 0,
+    displayPriceLabel: 'Custom Quote',
+    priceSuffix: 'Quoted by scale & design',
+    estimatedDuration: 'Custom Commission (Install included)',
+    iconName: 'Palette',
+    popular: true,
+    defaultSpecifics: {
+      approximateScale: '40" x 60" Statement Scale',
+      subjectDirection: 'Botanical & Flora Study',
+      acousticBattingBacking: true,
+      floaterFrameOption: 'Natural Rubbed Hardwood Frame'
+    },
+    specificOptions: [
+      {
+        id: 'approximateScale',
+        name: 'Anticipated Dimensions / Scale',
+        type: 'select',
+        options: [
+          '36" x 48" Single Focal Panel',
+          '40" x 60" Statement Panel',
+          '48" x 72" Grand Architectural Scale',
+          'Multi-Panel Triptych (Three Panels)',
+          'Custom Wall-Scale Mural'
+        ],
+        defaultValue: '40" x 60" Statement Scale'
+      },
+      {
+        id: 'subjectDirection',
+        name: 'Visual Theme',
+        type: 'select',
+        options: [
+          'Botanical & Flora Study',
+          'Architectural Archive & Vintage Vignettes',
+          'Warm Earth Tones Abstract',
+          'Custom Client Theme'
+        ],
+        defaultValue: 'Botanical & Flora Study'
+      },
+      {
+        id: 'floaterFrameOption',
+        name: 'Hardwood Floater Frame Preference',
+        type: 'select',
+        options: [
+          'Natural Rubbed White Oak Frame',
+          'Walnut Stained Hardwood Frame',
+          'Unframed Clean Textile Wrap'
+        ],
+        defaultValue: 'Natural Rubbed White Oak Frame'
+      }
+    ]
+  },
+  {
+    id: 'color-palette-plan',
+    title: 'Color Palette Plan (Sherwin-Williams)',
+    category: 'color-finish',
+    menuBadge: 'Paint direction',
+    tagline: 'Room-by-room Sherwin-Williams color direction, finish sheens, and painter prep notes.',
+    description: 'A cohesive room-by-room color direction specified exclusively in Sherwin-Williams codes. Evaluates morning vs afternoon light, flooring undertones, and architectural sheens.',
+    detailedPoints: [
+      'Comprehensive Sherwin-Williams color specifications for walls, ceilings, and trim',
+      'Natural light exposure and temperature analysis for each space',
+      'Sheen and finish recommendations (flat, matte, satin, semi-gloss) for durability',
+      'Written specification sheet ready to hand directly to your painting contractor'
+    ],
+    exclusions: [
+      'Painting labor and physical gallons of paint are quoted/purchased separately.',
+      'Sample paint pots billed separately if needed.'
+    ],
+    pricingModel: 'flat',
+    basePrice: 350,
+    displayPriceLabel: '$350',
+    priceSuffix: 'flat rate',
+    estimatedDuration: 'Consultation & written guide',
+    iconName: 'Sparkles',
+    popular: true,
+    defaultSpecifics: {
+      numberOfRooms: 4,
+      includeColorTestingAddOn: false,
+      includeTrimAndDoors: true,
+      paletteAtmosphere: 'Warm Earthy & Soulful'
+    },
+    specificOptions: [
+      {
+        id: 'numberOfRooms',
+        name: 'Number of Rooms to Specify',
+        type: 'number',
+        defaultValue: 4,
+        unit: 'rooms',
+        description: 'Up to 5 rooms included in base flat rate'
+      },
+      {
+        id: 'includeColorTestingAddOn',
+        name: 'Color Testing Add-On — $125',
+        type: 'boolean',
+        defaultValue: false,
+        priceModifier: 125,
+        description: 'On-wall sample paint swatching and sheen evaluation (sample paint billed separately if needed)'
+      },
+      {
+        id: 'includeTrimAndDoors',
+        name: 'Include Architectural Trim, Doors & Ceilings',
+        type: 'boolean',
+        defaultValue: true
+      },
+      {
+        id: 'paletteAtmosphere',
+        name: 'Atmospheric Direction',
+        type: 'select',
+        options: ['Warm Earthy & Soulful', 'Airy Natural & Crisp', 'Moody & Saturated', 'Classic Mid-South Heritage'],
+        defaultValue: 'Warm Earthy & Soulful'
+      }
+    ]
+  },
   {
     id: 'art-hang',
     title: 'Art Hang',
@@ -75,65 +206,6 @@ export const SERVICES_CATALOGUE: ServiceOffering[] = [
           'Multiple Oversized Works (Quoted separately)'
         ],
         defaultValue: 'None (Standard artwork only)'
-      }
-    ]
-  },
-  {
-    id: 'window-treatment-plan',
-    title: 'Window Treatment Plan',
-    category: 'window-treatment',
-    menuBadge: 'Ready-made only',
-    tagline: 'Measure first. Order right. Install once.',
-    description: 'Accurate window measuring; ready-made curtain, shade, rod, and simple hardware recommendations; local and online product suggestions; guidance on ordering.',
-    detailedPoints: [
-      'Measure first. Order right. Install once.',
-      'Comprehensive on-site window measuring for proper architectural height and stack-back',
-      'Ready-made curtain, shade, rod, and simple hardware recommendations',
-      'Local and online product suggestions tailored to your budget and style',
-      'Step-by-step guidance on ordering with correct lengths and fullness'
-    ],
-    exclusions: [
-      'Strictly ready-made only. Not for custom drapery, motorized shades, workroom treatments, luxury hardware systems, or designer-specified installations.',
-      'Return installation is quoted separately once selections are confirmed.'
-    ],
-    pricingModel: 'flat',
-    basePrice: 300,
-    displayPriceLabel: '$300 plan',
-    priceSuffix: '',
-    estimatedDuration: 'Comprehensive measuring & plan',
-    iconName: 'Sliders',
-    popular: true,
-    defaultSpecifics: {
-      windowCount: 5,
-      ceilingHeight: '9 to 10 ft',
-      treatmentType: 'Curtains & Drapes (Ready-made)',
-      orderingAssistance: 'Include curated shopping links'
-    },
-    specificOptions: [
-      {
-        id: 'windowCount',
-        name: 'Number of Windows to Measure',
-        type: 'number',
-        defaultValue: 5,
-        unit: 'windows'
-      },
-      {
-        id: 'ceilingHeight',
-        name: 'Approximate Ceiling Height',
-        type: 'select',
-        options: ['8 ft Standard', '9 to 10 ft Tall', '12+ ft Vaulted'],
-        defaultValue: '9 to 10 ft Tall'
-      },
-      {
-        id: 'treatmentType',
-        name: 'Preferred Treatment Direction',
-        type: 'select',
-        options: [
-          'Curtains & Drapes (Ready-made)',
-          'Woven Roman Shades (Ready-made)',
-          'Mix of Drapes & Shades'
-        ],
-        defaultValue: 'Curtains & Drapes (Ready-made)'
       }
     ]
   },
@@ -356,133 +428,61 @@ export const SERVICES_CATALOGUE: ServiceOffering[] = [
     ]
   },
   {
-    id: 'color-palette-plan',
-    title: 'Color Palette Plan (Sherwin-Williams)',
-    category: 'color-finish',
-    menuBadge: 'Paint direction',
-    tagline: 'Room-by-room Sherwin-Williams color direction, finish sheens, and painter prep notes.',
-    description: 'A cohesive room-by-room color direction specified exclusively in Sherwin-Williams codes. Evaluates morning vs afternoon light, flooring undertones, and architectural sheens.',
+    id: 'window-treatment-plan',
+    title: 'Window Treatment Plan',
+    category: 'window-treatment',
+    menuBadge: 'Ready-made only',
+    tagline: 'Measure first. Order right. Install once.',
+    description: 'Accurate window measuring; ready-made curtain, shade, rod, and simple hardware recommendations; local and online product suggestions; guidance on ordering.',
     detailedPoints: [
-      'Comprehensive Sherwin-Williams color specifications for walls, ceilings, and trim',
-      'Natural light exposure and temperature analysis for each space',
-      'Sheen and finish recommendations (flat, matte, satin, semi-gloss) for durability',
-      'Written specification sheet ready to hand directly to your painting contractor'
+      'Measure first. Order right. Install once.',
+      'Comprehensive on-site window measuring for proper architectural height and stack-back',
+      'Ready-made curtain, shade, rod, and simple hardware recommendations',
+      'Local and online product suggestions tailored to your budget and style',
+      'Step-by-step guidance on ordering with correct lengths and fullness'
     ],
     exclusions: [
-      'Painting labor and physical gallons of paint are quoted/purchased separately.',
-      'Sample paint pots billed separately if needed.'
+      'Strictly ready-made only. Not for custom drapery, motorized shades, workroom treatments, luxury hardware systems, or designer-specified installations.',
+      'Return installation is quoted separately once selections are confirmed.'
     ],
     pricingModel: 'flat',
-    basePrice: 350,
-    displayPriceLabel: '$350',
-    priceSuffix: 'flat rate',
-    estimatedDuration: 'Consultation & written guide',
-    iconName: 'Sparkles',
-    popular: true,
+    basePrice: 300,
+    displayPriceLabel: '$300 plan',
+    priceSuffix: '',
+    estimatedDuration: 'Comprehensive measuring & plan',
+    iconName: 'Sliders',
+    popular: false,
     defaultSpecifics: {
-      numberOfRooms: 4,
-      includeColorTestingAddOn: false,
-      includeTrimAndDoors: true,
-      paletteAtmosphere: 'Warm Earthy & Soulful'
+      windowCount: 5,
+      ceilingHeight: '9 to 10 ft',
+      treatmentType: 'Curtains & Drapes (Ready-made)',
+      orderingAssistance: 'Include curated shopping links'
     },
     specificOptions: [
       {
-        id: 'numberOfRooms',
-        name: 'Number of Rooms to Specify',
+        id: 'windowCount',
+        name: 'Number of Windows to Measure',
         type: 'number',
-        defaultValue: 4,
-        unit: 'rooms',
-        description: 'Up to 5 rooms included in base flat rate'
+        defaultValue: 5,
+        unit: 'windows'
       },
       {
-        id: 'includeColorTestingAddOn',
-        name: 'Color Testing Add-On — $125',
-        type: 'boolean',
-        defaultValue: false,
-        priceModifier: 125,
-        description: 'On-wall sample paint swatching and sheen evaluation (sample paint billed separately if needed)'
-      },
-      {
-        id: 'includeTrimAndDoors',
-        name: 'Include Architectural Trim, Doors & Ceilings',
-        type: 'boolean',
-        defaultValue: true
-      },
-      {
-        id: 'paletteAtmosphere',
-        name: 'Atmospheric Direction',
+        id: 'ceilingHeight',
+        name: 'Approximate Ceiling Height',
         type: 'select',
-        options: ['Warm Earthy & Soulful', 'Airy Natural & Crisp', 'Moody & Saturated', 'Classic Mid-South Heritage'],
-        defaultValue: 'Warm Earthy & Soulful'
-      }
-    ]
-  },
-  {
-    id: 'custom-fabric-art',
-    title: 'Custom Fabric Wall Art',
-    category: 'custom-fabric',
-    menuBadge: 'Custom work',
-    tagline: 'Large-format fabric wall art combining printed fabric, scale, color, pattern, and selective hand-painted detailing.',
-    description: 'Built to provide acoustic warmth and visual scale without cold glass glare. Quoted custom by size, design, materials, and installation needs.',
-    detailedPoints: [
-      'Large-format textile wall art tailored to specific wall dimensions and sightlines',
-      'Printed fabric murals and botanical panels built on solid pine stretchers',
-      'Internal acoustic batting layer softens room echo and warms acoustics',
-      'Selective hand-painted acrylic & metallic leaf detailing by Stevan',
-      'Quoted custom by size, design, materials, and installation needs'
-    ],
-    exclusions: [
-      'Quoted custom by size, design, materials, and installation needs.'
-    ],
-    pricingModel: 'custom_quote',
-    basePrice: 0,
-    displayPriceLabel: 'Custom Quote',
-    priceSuffix: 'Quoted by scale & design',
-    estimatedDuration: 'Custom Commission (Install included)',
-    iconName: 'Palette',
-    popular: true,
-    defaultSpecifics: {
-      approximateScale: '40" x 60" Statement Scale',
-      subjectDirection: 'Botanical & Flora Study',
-      acousticBattingBacking: true,
-      floaterFrameOption: 'Natural Rubbed Hardwood Frame'
-    },
-    specificOptions: [
+        options: ['8 ft Standard', '9 to 10 ft Tall', '12+ ft Vaulted'],
+        defaultValue: '9 to 10 ft Tall'
+      },
       {
-        id: 'approximateScale',
-        name: 'Anticipated Dimensions / Scale',
+        id: 'treatmentType',
+        name: 'Preferred Treatment Direction',
         type: 'select',
         options: [
-          '36" x 48" Single Focal Panel',
-          '40" x 60" Statement Panel',
-          '48" x 72" Grand Architectural Scale',
-          'Multi-Panel Triptych (Three Panels)',
-          'Custom Wall-Scale Mural'
+          'Curtains & Drapes (Ready-made)',
+          'Woven Roman Shades (Ready-made)',
+          'Mix of Drapes & Shades'
         ],
-        defaultValue: '40" x 60" Statement Scale'
-      },
-      {
-        id: 'subjectDirection',
-        name: 'Visual Theme',
-        type: 'select',
-        options: [
-          'Botanical & Flora Study',
-          'Architectural Archive & Vintage Vignettes',
-          'Warm Earth Tones Abstract',
-          'Custom Client Theme'
-        ],
-        defaultValue: 'Botanical & Flora Study'
-      },
-      {
-        id: 'floaterFrameOption',
-        name: 'Hardwood Floater Frame Preference',
-        type: 'select',
-        options: [
-          'Natural Rubbed White Oak Frame',
-          'Walnut Stained Hardwood Frame',
-          'Unframed Clean Textile Wrap'
-        ],
-        defaultValue: 'Natural Rubbed White Oak Frame'
+        defaultValue: 'Curtains & Drapes (Ready-made)'
       }
     ]
   }
