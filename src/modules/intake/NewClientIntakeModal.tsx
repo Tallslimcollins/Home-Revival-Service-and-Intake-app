@@ -27,7 +27,7 @@ export const NewClientIntakeModal: React.FC = () => {
   // Form State
   const [currentSituation, setCurrentSituation] = useState('');
   const [heaviestChallenge, setHeaviestChallenge] = useState('');
-  const [priorityFocus, setPriorityFocus] = useState('Single-Room Setup + Flow Reset');
+  const [priorityFocus, setPriorityFocus] = useState("I Don't Know Yet / Need Stevan's Guidance");
 
   const [address, setAddress] = useState('');
   const [neighborhood, setNeighborhood] = useState('Midtown Memphis');
@@ -157,71 +157,92 @@ export const NewClientIntakeModal: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-bold text-[#2C2825] mb-1.5">
-                  What is going on in your home right now? *
+                  What space or problem are you ready to tackle first?
+                </label>
+                <div className="space-y-2">
+                  {/* Primary Guidance Option */}
+                  <button
+                    type="button"
+                    onClick={() => setPriorityFocus("I Don't Know Yet / Need Stevan's Guidance")}
+                    className={`w-full p-3.5 rounded-2xl text-left border flex items-center justify-between transition-all ${
+                      priorityFocus === "I Don't Know Yet / Need Stevan's Guidance"
+                        ? 'bg-[#2C2825] text-white border-[#2C2825] shadow-sm'
+                        : 'bg-[#FAF3EC] text-[#8C461C] border-[#ECD8C8] hover:bg-[#F5ECE1]'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-2.5">
+                      <Sparkles className="w-4 h-4 text-[#B25E29] shrink-0" />
+                      <div>
+                        <div className="text-xs font-bold">I Don't Know Yet / Need Stevan's Guidance</div>
+                        <div className={`text-[11px] ${priorityFocus === "I Don't Know Yet / Need Stevan's Guidance" ? 'text-stone-300' : 'text-[#8C7B6C]'}`}>
+                          Unsure where to start — looking for Stevan's experienced eye and suggestions.
+                        </div>
+                      </div>
+                    </div>
+                    {priorityFocus === "I Don't Know Yet / Need Stevan's Guidance" && (
+                      <CheckCircle2 className="w-4 h-4 text-[#DFC08C] shrink-0" />
+                    )}
+                  </button>
+
+                  {/* Specific Service Options */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+                    {[
+                      'Single-Room Setup + Flow Reset',
+                      'Art Hang & Gallery Wall Layout',
+                      'Window Treatment Measuring & Direction',
+                      'Move-In Unpack & Livable Setup',
+                      'Sherwin-Williams Color Palette Direction',
+                      'Multi-Room Master Walkthrough Roadmap',
+                      'Closet / Declutter / Storage Overhaul',
+                      'Bespoke Fabric Wall Art Commission'
+                    ].map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setPriorityFocus(option)}
+                        className={`p-3 rounded-xl text-left border transition-all ${
+                          priorityFocus === option
+                            ? 'bg-[#2C2825] text-white border-[#2C2825] shadow-sm font-semibold'
+                            : 'bg-white text-[#4A453F] border-[#E2DAD0] hover:bg-[#F7F3EC]'
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-[#2C2825] mb-1">
+                  What is going on in your home right now? <span className="font-normal text-[#8C827A]">(A sentence or two is plenty)</span>
                 </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={currentSituation}
                   onChange={(e) => setCurrentSituation(e.target.value)}
-                  placeholder="e.g. Recently moved in, rooms feel cold and mismatched, piles of unopened decor boxes, or furniture layout feels awkward and blocks natural light..."
-                  className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] rounded-2xl p-3.5 text-[#2C2825] placeholder:text-[#9E948A] focus:outline-none focus:ring-1 focus:ring-[#B25E29]"
+                  placeholder="e.g. Recently moved in, rooms feel cold or mismatched, or furniture layout feels awkward and blocks natural light..."
+                  className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] rounded-2xl p-3 text-[#2C2825] placeholder:text-[#9E948A] focus:outline-none focus:ring-1 focus:ring-[#B25E29]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#2C2825] mb-1.5">
-                  What feels heaviest or hardest to face alone? *
+                <label className="block text-xs font-bold text-[#2C2825] mb-1">
+                  What feels heaviest or hardest to face alone? <span className="font-normal text-[#8C827A]">(Optional)</span>
                 </label>
                 <textarea
                   rows={2}
                   value={heaviestChallenge}
                   onChange={(e) => setHeaviestChallenge(e.target.value)}
-                  placeholder="e.g. Figuring out which pieces to keep vs edit, drilling into historic plaster walls, or finding the momentum to start without getting paralyzed..."
-                  className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] rounded-2xl p-3.5 text-[#2C2825] placeholder:text-[#9E948A] focus:outline-none focus:ring-1 focus:ring-[#B25E29]"
+                  placeholder="e.g. Figuring out which pieces to keep vs edit, drilling into historic plaster walls, or finding the momentum to start..."
+                  className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] rounded-2xl p-3 text-[#2C2825] placeholder:text-[#9E948A] focus:outline-none focus:ring-1 focus:ring-[#B25E29]"
                 />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-[#2C2825] mb-1.5">
-                  What space or problem are you ready to tackle first?
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                  {[
-                    'Single-Room Setup + Flow Reset',
-                    'Art Hang & Gallery Wall Layout',
-                    'Window Treatment Measuring & Direction',
-                    'Move-In Unpack & Livable Setup',
-                    'Sherwin-Williams Color Palette Direction',
-                    'Multi-Room Master Walkthrough Roadmap',
-                    'Closet / Declutter / Storage Overhaul',
-                    'Bespoke Fabric Wall Art Commission'
-                  ].map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => setPriorityFocus(option)}
-                      className={`p-3 rounded-xl text-left border transition-all ${
-                        priorityFocus === option
-                          ? 'bg-[#2C2825] text-white border-[#2C2825] shadow-sm font-semibold'
-                          : 'bg-white text-[#4A453F] border-[#E2DAD0] hover:bg-[#F7F3EC]'
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               <div className="pt-2 flex justify-end">
                 <button
                   type="button"
-                  onClick={() => {
-                    if (!currentSituation.trim() && !heaviestChallenge.trim()) {
-                      alert('Please share a sentence or two about your current home situation.');
-                      return;
-                    }
-                    setStep(2);
-                  }}
+                  onClick={() => setStep(2)}
                   className="inline-flex items-center space-x-2 px-6 py-2.5 rounded-full text-xs font-semibold bg-[#2C2825] text-white hover:bg-[#B25E29] transition-colors shadow-sm"
                 >
                   <span>Continue: Home Details</span>
@@ -433,7 +454,7 @@ export const NewClientIntakeModal: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-[#2C2825] mb-1">
                     Your Full Name *
@@ -475,26 +496,79 @@ export const NewClientIntakeModal: React.FC = () => {
                     className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] rounded-xl px-3.5 py-2.5 text-[#2C2825]"
                   />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-[#2C2825] mb-1">
-                    Preferred Response Method
-                  </label>
-                  <select
-                    value={preferredContactMethod}
-                    onChange={(e) => setPreferredContactMethod(e.target.value as any)}
-                    className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] rounded-xl px-3 py-2.5 text-[#2C2825]"
+              {/* Communication Preference Cards */}
+              <div className="space-y-2">
+                <label className="block text-xs font-bold text-[#2C2825]">
+                  How would you prefer Stevan to connect with you first?
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setPreferredContactMethod('phone')}
+                    className={`p-3.5 rounded-2xl text-left border transition-all flex flex-col justify-between ${
+                      preferredContactMethod === 'phone'
+                        ? 'bg-[#2C2825] text-white border-[#2C2825] shadow-sm'
+                        : 'bg-white text-[#4A453F] border-[#E2DAD0] hover:bg-[#F7F3EC]'
+                    }`}
                   >
-                    <option value="email">Email Proposal (Recommended)</option>
-                    <option value="phone">Direct Phone Call</option>
-                    <option value="text">SMS Text Message</option>
-                  </select>
+                    <div>
+                      <div className="text-xs font-bold mb-1 flex items-center justify-between">
+                        <span>📞 Phone Call First</span>
+                        {preferredContactMethod === 'phone' && <CheckCircle2 className="w-3.5 h-3.5 text-[#DFC08C]" />}
+                      </div>
+                      <p className={`text-[11px] leading-relaxed ${preferredContactMethod === 'phone' ? 'text-stone-300' : 'text-[#7A7168]'}`}>
+                        A relaxed 10-minute chat to discuss your home before suggesting anything.
+                      </p>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPreferredContactMethod('email')}
+                    className={`p-3.5 rounded-2xl text-left border transition-all flex flex-col justify-between ${
+                      preferredContactMethod === 'email'
+                        ? 'bg-[#2C2825] text-white border-[#2C2825] shadow-sm'
+                        : 'bg-white text-[#4A453F] border-[#E2DAD0] hover:bg-[#F7F3EC]'
+                    }`}
+                  >
+                    <div>
+                      <div className="text-xs font-bold mb-1 flex items-center justify-between">
+                        <span>✉️ Email Proposal</span>
+                        {preferredContactMethod === 'email' && <CheckCircle2 className="w-3.5 h-3.5 text-[#DFC08C]" />}
+                      </div>
+                      <p className={`text-[11px] leading-relaxed ${preferredContactMethod === 'email' ? 'text-stone-300' : 'text-[#7A7168]'}`}>
+                        Initial thoughts, service ideas, and transparent pricing to review at your pace.
+                      </p>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPreferredContactMethod('text')}
+                    className={`p-3.5 rounded-2xl text-left border transition-all flex flex-col justify-between ${
+                      preferredContactMethod === 'text'
+                        ? 'bg-[#2C2825] text-white border-[#2C2825] shadow-sm'
+                        : 'bg-white text-[#4A453F] border-[#E2DAD0] hover:bg-[#F7F3EC]'
+                    }`}
+                  >
+                    <div>
+                      <div className="text-xs font-bold mb-1 flex items-center justify-between">
+                        <span>💬 Text / SMS</span>
+                        {preferredContactMethod === 'text' && <CheckCircle2 className="w-3.5 h-3.5 text-[#DFC08C]" />}
+                      </div>
+                      <p className={`text-[11px] leading-relaxed ${preferredContactMethod === 'text' ? 'text-stone-300' : 'text-[#7A7168]'}`}>
+                        Quick text message to coordinate and say hello.
+                      </p>
+                    </div>
+                  </button>
                 </div>
               </div>
 
-              {/* Standard Billing Terms Reminder */}
-              <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#EDE5D8] text-[11px] text-[#7A7168] italic">
-                <strong>Standard Billing Terms:</strong> "Materials, specialty hardware, sample paint, purchases, hauling, and unusually complex installs are billed or quoted separately."
+              {/* Cautious, Low-Pressure Reassurance */}
+              <div className="p-3.5 bg-[#FAF3EC] rounded-2xl border border-[#ECD8C8] text-[11px] text-[#7D3B12] leading-relaxed">
+                <strong>No-Pressure Promise:</strong> "No sales pitches, no assumptions, and zero commitment. Stevan connects with you first to get a feel for your space and ensure we're the right fit."
               </div>
 
               <div className="pt-2 flex items-center justify-between">
@@ -539,20 +613,26 @@ export const NewClientIntakeModal: React.FC = () => {
               <div className="bg-white p-5 rounded-2xl border border-[#E7E0D5] max-w-md mx-auto text-left text-xs space-y-2.5">
                 <div className="flex items-center space-x-2 text-[#9A4616] font-semibold">
                   <Compass className="w-4 h-4" />
-                  <span>Next Steps (Within 24 Hours)</span>
+                  <span>What Happens Next (Within 24 Hours)</span>
                 </div>
                 <ul className="space-y-1.5 text-[#554E46] text-xs">
                   <li className="flex items-start space-x-1.5">
                     <span className="text-[#B25E29] font-bold">•</span>
-                    <span>Stevan reviews your notes and photos personally.</span>
+                    <span>
+                      {preferredContactMethod === 'phone' && (
+                        <span>Stevan will give you a relaxed phone call at <strong>{phone}</strong> to chat through your space and answer any questions.</span>
+                      )}
+                      {preferredContactMethod === 'email' && (
+                        <span>Stevan will review your notes and email you directly at <strong>{email}</strong> with personalized suggestions and options.</span>
+                      )}
+                      {preferredContactMethod === 'text' && (
+                        <span>Stevan will send a text to <strong>{phone}</strong> to coordinate next steps.</span>
+                      )}
+                    </span>
                   </li>
                   <li className="flex items-start space-x-1.5">
                     <span className="text-[#B25E29] font-bold">•</span>
-                    <span>You will receive an email recommendation tailored to your space with verified pricing and calendar availability.</span>
-                  </li>
-                  <li className="flex items-start space-x-1.5">
-                    <span className="text-[#B25E29] font-bold">•</span>
-                    <span>No deposit or payment is due until you approve the customized roadmap.</span>
+                    <span>No deposit or payment is due until you and Stevan agree on a customized roadmap.</span>
                   </li>
                 </ul>
               </div>
