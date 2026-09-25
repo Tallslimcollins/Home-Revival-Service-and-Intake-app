@@ -1,6 +1,6 @@
 import { Booking } from '../types';
 
-export const STEVAN_CALENDAR_EMAIL = 'service@stevancollinslazich.com';
+export const STEVAN_CALENDAR_EMAIL = 'scl@stevancollinslazich.com';
 export const STEVAN_DOMAIN = 'stevancollinslazich.com';
 
 /**

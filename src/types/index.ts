@@ -81,7 +81,7 @@ export interface PaymentReceipt {
   paymentType: 'full' | 'deposit' | 'balance_settlement';
   currency: string;
   clientEmail: string;
-  merchantBcc: string; // 'service@stevancollinslazich.com'
+  merchantBcc: string; // 'scl@stevancollinslazich.com'
   receiptNumber: string;
   status: 'succeeded' | 'refunded';
 }

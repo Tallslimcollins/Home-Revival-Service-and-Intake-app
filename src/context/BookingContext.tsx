@@ -4,6 +4,7 @@ import { SERVICES_CATALOGUE } from '../data/services';
 import { INITIAL_BOOKINGS } from '../data/initialBookings';
 import { INITIAL_INTAKE_INQUIRIES } from '../data/initialIntakes';
 import { notificationEngine } from '../modules/notifications/notificationEngine';
+import { submitIntakeToFlamingo, submitBookingToFlamingo } from '../services/flamingoApi';
 
 interface BookingContextType {
   bookings: Booking[];
@@ -205,9 +206,14 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     setIntakes(prev => [newIntake, ...prev]);
 
+    // Send asynchronously to WordPress Contact Form 7 / Flamingo
+    submitIntakeToFlamingo(newIntake).catch(err => {
+      console.warn('[Flamingo API] Background submission notice:', err);
+    });
+
     addNotification(
       `New Client Intake Submitted (${intakeId})`,
-      `Intake from ${newIntake.fullName} received. Archived & BCC to service@stevancollinslazich.com.`
+      `Intake from ${newIntake.fullName} received. Archived & BCC to scl@stevancollinslazich.com.`
     );
 
     return newIntake;
@@ -323,6 +329,11 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     setBookings(prev => [newBooking, ...prev]);
 
+    // Send asynchronously to WordPress Contact Form 7 / Flamingo
+    submitBookingToFlamingo(newBooking).catch(err => {
+      console.warn('[Flamingo API] Background booking submission notice:', err);
+    });
+
     addNotification(
       `New Booking Scheduled (${newId})`,
       `Your request for "${newBooking.serviceTitle}" has been received. Stevan will review specific requirements and sync with his calendar.`,
@@ -398,7 +409,7 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
       paymentType,
       currency: 'USD',
       clientEmail: booking.customer.email,
-      merchantBcc: 'service@stevancollinslazich.com',
+      merchantBcc: 'scl@stevancollinslazich.com',
       receiptNumber,
       status: 'succeeded',
     };
@@ -421,7 +432,7 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     addNotification(
       `Payment Received: $${amount}`,
-      `Confirmation receipt ${receiptNumber} generated and sent to ${booking.customer.email} (BCC: service@stevancollinslazich.com).`,
+      `Confirmation receipt ${receiptNumber} generated and sent to ${booking.customer.email} (BCC: scl@stevancollinslazich.com).`,
       bookingId
     );
 

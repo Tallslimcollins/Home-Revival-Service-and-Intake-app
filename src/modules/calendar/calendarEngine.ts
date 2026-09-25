@@ -1,7 +1,7 @@
 import { Booking } from '../../types';
 import { ExternalCalendarEvent, CalendarSyncLog, TwoWaySyncConfig } from './types';
 
-export const STEVAN_CALENDAR_EMAIL = 'service@stevancollinslazich.com';
+export const STEVAN_CALENDAR_EMAIL = 'scl@stevancollinslazich.com';
 export const STEVAN_DOMAIN = 'stevancollinslazich.com';
 
 // Mock external busy calendar events fetched via inbound sync from stevancollinslazich.com
@@ -13,7 +13,7 @@ export const INITIAL_EXTERNAL_BUSY_SLOTS: ExternalCalendarEvent[] = [
     date: '2026-10-05',
     timeSlot: '09:00 AM - 01:00 PM (Morning)',
     isBusyBlock: true,
-    notes: 'Blocked off in personal Google Calendar at service@stevancollinslazich.com'
+    notes: 'Blocked off in personal Google Calendar at scl@stevancollinslazich.com'
   },
   {
     id: 'ext-slot-2',

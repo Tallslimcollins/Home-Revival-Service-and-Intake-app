@@ -532,7 +532,7 @@ export const NewClientIntakeModal: React.FC = () => {
                   Thank You, {fullName.split(' ')[0]}!
                 </h3>
                 <p className="text-xs text-[#5C554E] max-w-md mx-auto mt-2 leading-relaxed">
-                  Your home details have been received directly at the studio. An archived copy has been logged and BCC'd to <strong>service@stevancollinslazich.com</strong>.
+                  Your home details have been received directly at the studio. An archived copy has been logged and BCC'd to <strong>scl@stevancollinslazich.com</strong>.
                 </p>
               </div>
 

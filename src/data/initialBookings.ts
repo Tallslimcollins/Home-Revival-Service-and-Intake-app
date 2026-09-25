@@ -137,7 +137,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
         paymentType: 'full',
         currency: 'USD',
         clientEmail: 'holloway.marcus@gmail.com',
-        merchantBcc: 'service@stevancollinslazich.com',
+        merchantBcc: 'scl@stevancollinslazich.com',
         receiptNumber: 'RCPT-2026-0941',
         status: 'succeeded'
       }
@@ -197,7 +197,7 @@ export const INITIAL_BOOKINGS: Booking[] = [
         paymentType: 'deposit',
         currency: 'USD',
         clientEmail: 's.jenkins.design@outlook.com',
-        merchantBcc: 'service@stevancollinslazich.com',
+        merchantBcc: 'scl@stevancollinslazich.com',
         receiptNumber: 'RCPT-2026-0938',
         status: 'succeeded'
       }

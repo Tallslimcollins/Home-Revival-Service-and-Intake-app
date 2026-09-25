@@ -21,7 +21,7 @@ export interface CalendarSyncLog {
 
 export interface TwoWaySyncConfig {
   targetDomain: string; // 'stevancollinslazich.com'
-  targetEmail: string; // 'service@stevancollinslazich.com'
+  targetEmail: string; // 'scl@stevancollinslazich.com'
   autoTwoWaySync: boolean;
   inboundBusySlotsBlocking: boolean;
   syncIntervalMinutes: number;
