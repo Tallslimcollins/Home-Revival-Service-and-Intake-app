@@ -240,10 +240,14 @@ export const SERVICES_CATALOGUE: ServiceOffering[] = [
         type: 'select',
         options: [
           'Living / Family Room',
-          'Primary Bedroom',
+          'Entryway / Foyer / Mudroom',
           'Dining Room',
-          'Home Library / Study',
-          'Sunroom / Sitting Niche'
+          'Primary Bedroom',
+          'Home Library / Study / Office',
+          'Sunroom / Screened Porch',
+          'Outdoor Living / Covered Patio',
+          'Garage Apartment / Studio Suite',
+          'Other (Custom Space)'
         ],
         defaultValue: 'Living / Family Room'
       },

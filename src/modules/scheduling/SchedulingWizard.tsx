@@ -245,15 +245,38 @@ export const SchedulingWizard: React.FC = () => {
 
                     <div className="mt-2">
                       {opt.type === 'select' && opt.options && (
-                        <select
-                          value={specifics[opt.id] ?? opt.defaultValue}
-                          onChange={(e) => handleSpecificChange(opt.id, e.target.value)}
-                          className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] rounded-xl px-3 py-2 text-[#2C2825]"
-                        >
-                          {opt.options.map(optionVal => (
-                            <option key={optionVal} value={optionVal}>{optionVal}</option>
-                          ))}
-                        </select>
+                        <div className="space-y-2">
+                          <select
+                            value={specifics[opt.id] ?? opt.defaultValue}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              handleSpecificChange(opt.id, val);
+                              if (!val.toLowerCase().includes('other')) {
+                                handleSpecificChange(`${opt.id}_custom`, undefined);
+                              }
+                            }}
+                            className="w-full text-xs bg-[#FAF7F2] border border-[#DCD3C5] focus:border-[#B25E29] focus:outline-none rounded-xl px-3 py-2 text-[#2C2825]"
+                          >
+                            {opt.options.map(optionVal => (
+                              <option key={optionVal} value={optionVal}>{optionVal}</option>
+                            ))}
+                          </select>
+                          {String(specifics[opt.id] ?? opt.defaultValue).toLowerCase().includes('other') && (
+                            <div className="space-y-1">
+                              <label className="block text-[11px] font-semibold text-[#8C461C]">
+                                Specify your room or space:
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="e.g. Garage apartment, sunroom, outdoor living patio, mudroom..."
+                                value={specifics[`${opt.id}_custom`] || ''}
+                                onChange={(e) => handleSpecificChange(`${opt.id}_custom`, e.target.value)}
+                                className="w-full text-xs bg-white border border-[#B25E29]/50 focus:border-[#B25E29] focus:ring-1 focus:ring-[#B25E29] focus:outline-none rounded-xl px-3 py-2 text-[#2C2825] placeholder:text-[#A89F91]"
+                                autoFocus
+                              />
+                            </div>
+                          )}
+                        </div>
                       )}
 
                       {opt.type === 'number' && (
