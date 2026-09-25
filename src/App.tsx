@@ -44,6 +44,22 @@ const MainContent: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isPinModalOpen, setIsPinModalOpen] = useState(false);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState(false);
+
+  const handlePinSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pinInput.trim() === '0874') {
+      setIsAdminMode(true);
+      setActiveTab('admin-dashboard');
+      setIsPinModalOpen(false);
+      setPinInput('');
+      setPinError(false);
+    } else {
+      setPinError(true);
+    }
+  };
 
   const filteredServices = services.filter(svc => {
     const matchesCat = selectedCategory === 'all' || svc.category === selectedCategory;
@@ -276,15 +292,36 @@ const MainContent: React.FC = () => {
                   </button>
                 </li>
                 <li>
-                  <button 
-                    onClick={() => {
-                      setIsAdminMode(true);
-                      setActiveTab('admin-dashboard');
-                    }} 
-                    className="text-amber-400 hover:text-amber-300 font-medium"
-                  >
-                    Stevan's Price & Scope Adjuster →
-                  </button>
+                  {isAdminMode ? (
+                    <div className="flex items-center space-x-2">
+                      <button 
+                        onClick={() => setActiveTab('admin-dashboard')} 
+                        className="text-amber-400 hover:text-amber-300 font-medium"
+                      >
+                        Studio Admin Dashboard →
+                      </button>
+                      <button 
+                        onClick={() => {
+                          setIsAdminMode(false);
+                          setActiveTab('services');
+                        }}
+                        className="text-[10px] text-stone-400 hover:text-white underline"
+                      >
+                        (Lock Admin)
+                      </button>
+                    </div>
+                  ) : (
+                    <button 
+                      onClick={() => {
+                        setPinInput('');
+                        setPinError(false);
+                        setIsPinModalOpen(true);
+                      }} 
+                      className="text-stone-400 hover:text-amber-300 transition-colors flex items-center space-x-1"
+                    >
+                      <span>Studio Admin Access (PIN)</span>
+                    </button>
+                  )}
                 </li>
               </ul>
             </div>
@@ -308,6 +345,72 @@ const MainContent: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Studio Admin PIN Modal */}
+      {isPinModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-[#FAF8F5] rounded-3xl border border-[#E7E0D5] w-full max-w-sm shadow-2xl p-6 space-y-4">
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="text-[10px] uppercase font-mono tracking-widest font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
+                  Studio Security
+                </span>
+                <h3 className="text-xl font-bold font-editorial text-[#2C2825] mt-1">
+                  Enter Studio PIN
+                </h3>
+              </div>
+              <button 
+                onClick={() => setIsPinModalOpen(false)}
+                className="text-[#8C827A] hover:text-[#2C2825]"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-[#5C554E]">
+              Enter the 4-digit PIN to access Stevan's Studio Command and price adjustments.
+            </p>
+
+            <form onSubmit={handlePinSubmit} className="space-y-4">
+              <div>
+                <input
+                  type="password"
+                  maxLength={6}
+                  autoFocus
+                  placeholder="Enter PIN"
+                  value={pinInput}
+                  onChange={(e) => {
+                    setPinInput(e.target.value);
+                    setPinError(false);
+                  }}
+                  className="w-full text-center text-2xl tracking-[0.3em] font-mono py-2.5 bg-white border border-[#DCD3C5] rounded-xl text-[#2C2825] focus:ring-2 focus:ring-[#B25E29] focus:outline-none"
+                />
+                {pinError && (
+                  <p className="text-xs text-red-600 mt-1.5 text-center font-medium">
+                    Incorrect PIN. Access restricted.
+                  </p>
+                )}
+              </div>
+
+              <div className="flex items-center justify-end space-x-2">
+                <button
+                  type="button"
+                  onClick={() => setIsPinModalOpen(false)}
+                  className="px-4 py-2 text-xs font-semibold text-[#554E46] hover:text-[#2C2825]"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2 rounded-full text-xs font-semibold bg-[#2C2825] hover:bg-[#B25E29] text-white transition-colors"
+                >
+                  Unlock Admin
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

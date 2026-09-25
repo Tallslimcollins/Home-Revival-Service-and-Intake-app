@@ -12,9 +12,9 @@ import { ClientIntakeInquiry, Booking } from '../types';
 export const WP_BASE_URL = 
   import.meta.env.VITE_WP_BASE_URL || 'https://stevancollinslazich.com';
 
-// Contact Form 7 ID for "New Client Intake Form"
+// Contact Form 7 Numeric ID for "New Client Intake Form" (ID 2126 / hash 4153e63)
 export const CF7_INTAKE_FORM_ID = 
-  import.meta.env.VITE_CF7_INTAKE_FORM_ID || '4153e63';
+  import.meta.env.VITE_CF7_INTAKE_FORM_ID || '2126';
 
 export interface FlamingoSubmissionResult {
   success: boolean;
@@ -24,12 +24,41 @@ export interface FlamingoSubmissionResult {
 }
 
 /**
+ * Helper to map intake priority to one of the strict dropdown options on WordPress CF7
+ */
+function mapPriorityToCf7Service(priority: string): string {
+  const p = (priority || '').toLowerCase();
+  if (p.includes('art') || p.includes('gallery') || p.includes('hang')) {
+    return 'Art Hang ($400)';
+  }
+  if (p.includes('color') || p.includes('paint') || p.includes('palette')) {
+    return 'Color Palette Plan ($350)';
+  }
+  if (p.includes('reset') || p.includes('organiz') || p.includes('closet') || p.includes('declutter')) {
+    return 'Home Reset + Organizing (From $450)';
+  }
+  if (p.includes('unpack') || p.includes('move') || p.includes('box')) {
+    return 'Move-In Unpack + Setup (From $350)';
+  }
+  if (p.includes('window') || p.includes('curtain') || p.includes('drape') || p.includes('shade')) {
+    return 'Window Treatment Plan ($300)';
+  }
+  if (p.includes('room') || p.includes('styl') || p.includes('furnitur')) {
+    return 'Room Setup + Styling (From $450)';
+  }
+  return "I Don't Know / Need Your Guidance";
+}
+
+/**
  * Submit New Client Intake Inquiry to WordPress / Flamingo
  */
 export async function submitIntakeToFlamingo(
   intake: ClientIntakeInquiry
 ): Promise<FlamingoSubmissionResult> {
   const endpoint = `${WP_BASE_URL.replace(/\/$/, '')}/wp-json/contact-form-7/v1/contact-forms/${CF7_INTAKE_FORM_ID}/feedback`;
+
+  const matchedService = mapPriorityToCf7Service(intake.priorityFocus);
+  const locationString = [intake.neighborhood, intake.address].filter(Boolean).join(', ') || 'Memphis Area';
 
   const formattedMessage = [
     `=== HOME REVIVAL NEW CLIENT INTAKE ===`,
@@ -65,16 +94,9 @@ export async function submitIntakeToFlamingo(
   formData.append('your-name', intake.fullName);
   formData.append('your-email', intake.email);
   formData.append('your-phone', intake.phone);
-  formData.append('your-subject', `[New Client Intake ${intake.id}] ${intake.fullName} - ${intake.priorityFocus}`);
+  formData.append('your-location', locationString);
+  formData.append('your-service', matchedService);
   formData.append('your-message', formattedMessage);
-  
-  // Also append raw fields in case the CF7 template has dedicated fields
-  formData.append('intake_id', intake.id);
-  formData.append('neighborhood', intake.neighborhood);
-  formData.append('wall_types', intake.homeAgeOrWallTypes);
-  formData.append('current_situation', intake.currentSituation);
-  formData.append('heaviest_challenge', intake.heaviestChallenge);
-  formData.append('priority_focus', intake.priorityFocus);
 
   try {
     const response = await fetch(endpoint, {

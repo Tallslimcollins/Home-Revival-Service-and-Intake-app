@@ -55,19 +55,12 @@ export const Header: React.FC = () => {
             <span className="hidden md:inline">Calendar Sync:</span>
             <span className="font-mono text-amber-200">{STEVAN_DOMAIN}</span>
           </div>
-          <button 
-            onClick={() => {
-              setIsAdminMode(!isAdminMode);
-              if (!isAdminMode) setActiveTab('admin-dashboard');
-            }}
-            className={`px-2.5 py-0.5 rounded text-[11px] font-medium transition-all ${
-              isAdminMode 
-                ? 'bg-amber-600 text-white shadow-sm' 
-                : 'bg-stone-800 text-stone-300 hover:text-white hover:bg-stone-700'
-            }`}
+          <a 
+            href="https://stevancollinslazich.com" 
+            className="text-stone-300 hover:text-white hover:underline text-[11px] font-medium transition-colors"
           >
-            {isAdminMode ? 'Studio Admin Active' : 'Switch to Studio Admin'}
-          </button>
+            ← Return to Website
+          </a>
         </div>
       </div>
 
@@ -152,12 +145,7 @@ export const Header: React.FC = () => {
                     : 'text-[#8F3B16] hover:bg-[#E6DECFA0]'
                 }`}
               >
-                Studio Admin
-                {pendingIntakesCount > 0 && (
-                  <span className="ml-1.5 px-1.5 py-0.2 text-[10px] rounded-full bg-amber-500 text-white font-bold">
-                    {pendingIntakesCount} new
-                  </span>
-                )}
+                Studio Admin Active
               </button>
             )}
           </nav>
@@ -259,25 +247,6 @@ export const Header: React.FC = () => {
                 </div>
               )}
             </div>
-
-            {/* Admin mode switcher badge */}
-            <button
-              onClick={() => {
-                const nextMode = !isAdminMode;
-                setIsAdminMode(nextMode);
-                if (nextMode) setActiveTab('admin-dashboard');
-                else setActiveTab('services');
-              }}
-              className={`p-2 rounded-xl flex items-center space-x-1.5 text-xs font-medium border transition-colors ${
-                isAdminMode
-                  ? 'bg-[#2C2825] text-amber-300 border-[#2C2825]'
-                  : 'bg-white text-[#5C554E] border-[#DFD7CA] hover:border-[#B25E29]'
-              }`}
-              title="Toggle between Client view and Stevan Collins' Studio Management portal"
-            >
-              <Briefcase className="w-4 h-4" />
-              <span className="hidden lg:inline">{isAdminMode ? 'Admin Mode' : 'Client Mode'}</span>
-            </button>
           </div>
         </div>
 
@@ -320,16 +289,6 @@ export const Header: React.FC = () => {
           >
             Calendar
           </button>
-          {isAdminMode && (
-            <button
-              onClick={() => setActiveTab('admin-dashboard')}
-              className={`font-medium py-1 px-2 rounded ${
-                activeTab === 'admin-dashboard' ? 'bg-[#8F3B16] text-white' : 'text-[#8F3B16]'
-              }`}
-            >
-              Admin {pendingIntakesCount > 0 ? `(${pendingIntakesCount})` : ''}
-            </button>
-          )}
         </div>
       </div>
     </header>
