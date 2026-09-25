@@ -148,41 +148,25 @@ export const Header: React.FC = () => {
             )}
           </nav>
 
-          {/* Right Action Icons: Notifications, Push Status */}
+          {/* Right Action Icons: Admin Notifications Only */}
           <div className="flex items-center space-x-3">
-            {/* Push notification banner button */}
-            {pushPermission !== 'granted' ? (
-              <button
-                onClick={requestPushPermission}
-                className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200 transition-colors"
-                title="Enable browser push notifications for upcoming service reminders"
-              >
-                <Bell className="w-3.5 h-3.5 text-amber-700 animate-bounce" />
-                <span>Enable Reminders</span>
-              </button>
-            ) : (
-              <div className="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs bg-emerald-50 text-emerald-800 border border-emerald-200">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span className="text-[11px] font-medium">Push Reminders Active</span>
-              </div>
-            )}
+            {isAdminMode && (
+              <div className="relative">
+                <button
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="relative p-2.5 rounded-full text-[#5C554E] hover:text-[#2C2825] hover:bg-[#EFEAE0] transition-colors"
+                  aria-label="View notifications"
+                  title="Studio Notifications"
+                >
+                  <Bell className="w-5 h-5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#B25E29] text-[10px] font-bold text-white">
+                      {unreadCount}
+                    </span>
+                  )}
+                </button>
 
-            {/* Notification Bell with Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2.5 rounded-full text-[#5C554E] hover:text-[#2C2825] hover:bg-[#EFEAE0] transition-colors"
-                aria-label="View notifications"
-              >
-                <Bell className="w-5 h-5" />
-                {unreadCount > 0 && (
-                  <span className="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#B25E29] text-[10px] font-bold text-white">
-                    {unreadCount}
-                  </span>
-                )}
-              </button>
-
-              {/* Notification Drawer Popover */}
+                {/* Notification Drawer Popover */}
               {showNotifications && (
                 <div className="absolute right-0 mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-[#E7E0D5] p-4 z-50 animate-in fade-in zoom-in-95">
                   <div className="flex items-center justify-between pb-3 border-b border-[#F0EBE1]">
@@ -245,8 +229,9 @@ export const Header: React.FC = () => {
                 </div>
               )}
             </div>
-          </div>
+          )}
         </div>
+      </div>
 
         {/* Mobile secondary navigation */}
         <div className="flex md:hidden items-center justify-around py-2.5 border-t border-[#E7E0D5] text-xs">

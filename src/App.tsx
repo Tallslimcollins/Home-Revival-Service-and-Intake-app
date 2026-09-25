@@ -75,26 +75,35 @@ const MainContent: React.FC = () => {
         {activeTab === 'services' && (
           <div className="space-y-10 animate-in fade-in duration-200">
             
-            {/* Editorial Hero Section */}
-            <div className="relative rounded-3xl bg-gradient-to-br from-[#2E2823] via-[#3D352E] to-[#26201B] text-[#FAF8F5] p-8 sm:p-12 border border-[#4A4036] shadow-xl overflow-hidden">
-              <div className="relative z-10 max-w-3xl space-y-4">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-amber-200 font-medium">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                  <span>Home Revival & Custom Fabric Wall Art</span>
-                  <span>•</span>
-                  <span>Memphis, TN</span>
+            {/* Editorial Hero Section — Clean & Minimal */}
+            <div className="relative rounded-3xl bg-[#2C2825] text-[#FAF8F5] p-8 sm:p-12 border border-[#443E38] shadow-xl overflow-hidden">
+              <div className="relative z-10 max-w-2xl space-y-4">
+                {/* Swallow Emblem */}
+                <div className="inline-flex items-center space-x-2 text-[#DFC08C]">
+                  <svg 
+                    viewBox="0 0 64 64" 
+                    fill="currentColor" 
+                    className="w-7 h-7 text-[#DFC08C]" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path d="M56 10C48 16 39 23 34 31C30 24 24 20 16 19C20 25 22 32 20 38C15 36 10 36 4 38C11 44 19 47 27 46C29 52 34 57 40 59C37 52 38 44 42 37C48 40 54 41 60 39C54 32 51 23 51 15C54 13 56 11 56 10Z" />
+                  </svg>
+                  <span className="text-xs uppercase tracking-widest font-semibold text-[#DFC08C]">
+                    Home Revival • Memphis, TN
+                  </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-5xl font-bold font-editorial tracking-tight text-white leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-editorial tracking-tight text-white leading-tight">
                   Thoughtful spaces crafted with what you already own.
                 </h1>
 
-                <p className="text-sm sm:text-base text-stone-300 leading-relaxed font-light">
-                  From precision art hanging and bespoke printed fabric panels to full room flow resets and Sherwin-Williams color planning. Book your appointment with live scope customization, instant calendar sync at <strong>{STEVAN_DOMAIN}</strong>, and flexible post-booking adjustments.
+                <p className="text-sm sm:text-base text-stone-300 font-light leading-relaxed">
+                  Practical hands-on styling, precision art placement, and color direction by Stevan Collins Lazich.
                 </p>
 
-                {/* Hero Dual-Path Client Switcher Action Buttons */}
-                <div className="pt-2 pb-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                {/* Dual-Path Client Switcher Action Buttons */}
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <button
                     onClick={() => {
                       setClientType('new');
@@ -118,27 +127,10 @@ const MainContent: React.FC = () => {
                     <span>Returning Clients: Service Menu</span>
                   </button>
                 </div>
-
-                {/* Hero Feature Pills */}
-                <div className="pt-2 flex flex-wrap gap-2 text-xs text-stone-300">
-                  <span className="px-3 py-1 rounded-full bg-stone-800/80 border border-stone-700 flex items-center space-x-1.5">
-                    <Check className="w-3 h-3 text-amber-300" />
-                    <span>Post-Booking Price & Specifics Adjuster</span>
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-stone-800/80 border border-stone-700 flex items-center space-x-1.5">
-                    <Calendar className="w-3 h-3 text-amber-300" />
-                    <span>Syncs with stevancollinslazich.com</span>
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-stone-800/80 border border-stone-700 flex items-center space-x-1.5">
-                    <Bell className="w-3 h-3 text-amber-300" />
-                    <span>Push Notifications & Reminders</span>
-                  </span>
-                </div>
               </div>
 
-              {/* Decorative background ambient circles */}
-              <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-amber-600/10 blur-3xl pointer-events-none"></div>
-              <div className="absolute right-1/4 -top-12 w-64 h-64 rounded-full bg-[#B25E29]/15 blur-3xl pointer-events-none"></div>
+              {/* Decorative background subtle ambient glow */}
+              <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full bg-[#B25E29]/10 blur-3xl pointer-events-none"></div>
             </div>
 
             {/* Returning Clients Service Menu Pills */}
@@ -325,7 +317,7 @@ const MainContent: React.FC = () => {
               </a>
             </div>
             <div>
-              Automated Receipts • Push Reminders • Real-time Scope Adjustments
+              Home Revival by Stevan Collins Lazich • Memphis, TN
             </div>
           </div>
         </div>
